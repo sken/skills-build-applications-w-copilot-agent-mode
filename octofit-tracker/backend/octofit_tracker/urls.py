@@ -18,6 +18,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.http import JsonResponse
 import os
+from octofit_tracker import views
 
 def api_root(request):
     codespace_name = os.environ.get('CODESPACE_NAME', 'localhost')
@@ -33,10 +34,9 @@ def api_root(request):
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', api_root),
-    # Add actual API endpoints here, e.g.:
-    # path('api/activities/', include('octofit_tracker.activities.urls')),
-    # path('api/users/', include('octofit_tracker.users.urls')),
-    # path('api/teams/', include('octofit_tracker.teams.urls')),
-    # path('api/workouts/', include('octofit_tracker.workouts.urls')),
-    # path('api/leaderboard/', include('octofit_tracker.leaderboard.urls')),
+    path('api/activities/', views.activities_list),
+    path('api/users/', views.users_list),
+    path('api/teams/', views.teams_list),
+    path('api/workouts/', views.workouts_list),
+    path('api/leaderboard/', views.leaderboard_list),
 ]
